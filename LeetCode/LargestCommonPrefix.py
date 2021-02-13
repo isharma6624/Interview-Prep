@@ -16,6 +16,6 @@ class Solution:
                     flag = False
                     
             if flag == True:
-                common = common + minLength[i]
+                common += minLength[i]
                 
         return common
