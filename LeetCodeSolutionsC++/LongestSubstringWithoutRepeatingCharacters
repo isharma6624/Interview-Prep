@@ -1,0 +1,29 @@
+//Time complexity = O(N) 
+//Space complexity = O(N)
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int start = 0;
+        int end = 0;
+        int maxLength = 0;
+        set<int> setList; //use Set to check if value exists already or not
+        
+        if(s.length() == 0) //dont really need this early termination
+            return 0;
+        
+        while(end < s.length()){
+            if(setList.find(s[end])!= setList.end()){
+                setList.erase(s[start]);
+                start += 1;
+            }
+            else{
+                setList.insert(s[end]);
+                end += 1;
+            }
+            maxLength = max(maxLength, (end - start));
+        }
+        return maxLength;
+    }
+};
+
