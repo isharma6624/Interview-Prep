@@ -1,0 +1,26 @@
+//Time complexity = O(N)
+//Space complexity = O(N)
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int start = 0;
+        int end = 0;
+        int currentSum = 0;
+        int minLength = INT_MAX;
+        
+        while(end < nums.size()){
+            if(currentSum + nums[end] < target){
+                currentSum += nums[end];
+                end += 1;
+            }
+            else{
+                minLength = min(minLength, (end - start)+1);
+                currentSum -= nums[start];
+                start += 1;
+            }
+        }
+        if(currentSum < target && (end - start) == nums.size())  //remember to check this case
+            return 0;
+        return minLength;
+    }
+};
