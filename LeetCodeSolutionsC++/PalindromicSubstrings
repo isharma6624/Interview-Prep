@@ -1,0 +1,34 @@
+//Time Complexity: O(N2)
+//Space: O(1)
+//palindromic check is O(1)
+class Solution {
+public:
+    int countSubstrings(string s) {
+        
+        int left, right;
+        int result=0;
+        int size = s.size()-1;
+        
+        for(int i= 0 ; i <= size; i++){
+            left = i;
+            right = i;
+            while(left >= 0 && right <= size && s[left] ==s[right]){
+                result++;
+                left--;
+                right++;
+            }
+        }
+        
+        for(int i= 0 ; i < size; i++){
+            left = i;
+            right = i+1;
+            while(left >= 0 && (right <= size) && s[left] ==s[right]){
+                result++;
+                left--;
+                right++;
+            }
+        }
+        return result;
+    }
+};
+
