@@ -8,7 +8,7 @@ public:
         int left, right;
         int result=0;
         int size = s.size()-1;
-        
+        //odd case
         for(int i= 0 ; i <= size; i++){
             left = i;
             right = i;
@@ -18,7 +18,7 @@ public:
                 right++;
             }
         }
-        
+        //even case
         for(int i= 0 ; i < size; i++){
             left = i;
             right = i+1;
