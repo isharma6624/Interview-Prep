@@ -1,0 +1,30 @@
+//Run time: O(N2)
+//Space: O(1)
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int nums2i = 0;
+        int nums1i = m;
+        
+        if(n==0)
+            return;
+        
+        if(m==0){
+            nums1 = nums2;
+            return;
+        }
+            
+        for(int i = 0; i < n; i++){
+            nums1[nums1i] = nums2[i]; //added at the end
+            while(nums1i > 0 && nums1[nums1i] < nums1[nums1i-1] ){
+                int temp = nums1[nums1i];
+                nums1[nums1i] = nums1[nums1i-1];
+                nums1[nums1i-1] = temp;
+                nums1i--;
+            }
+            m = m + 1;
+            nums1i = m;
+          
+        }
+    }
+};
