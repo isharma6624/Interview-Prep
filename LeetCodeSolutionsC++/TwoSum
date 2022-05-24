@@ -1,0 +1,30 @@
+//Run time: O(N)  Use hashmap
+//Space: O(N) complexity for hashmap data structure for map is a red black tree
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int, int> map;
+        vector<int> ans;
+        
+        for(int i= 0; i < nums.size();i++){
+            
+            if(map.count(nums[i]) > 0){
+                ans.push_back(i);
+                ans.push_back(map[nums[i]]);
+                return ans;
+            }
+            else{
+                //map[target-nums[i]] = i;
+                map.insert({(target-nums[i]), i});
+            }
+                
+        }
+        return ans;
+    }
+};
+
+
+    
+
+
+
