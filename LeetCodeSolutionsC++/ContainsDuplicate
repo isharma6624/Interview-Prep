@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        
+        int size = nums.size() - 1;
+        if(nums.size() < 2)
+            return false;
+        
+        sort(nums.begin(),nums.end());
+        for(int i = 0; i < size; i++){
+            if(nums[i] == nums[i+1])
+                return true;
+        }
+        return false;
+    }
+};
+
+//sort and check prev run time:O(NlogN) space time:O(1) C++ STL sort is O(NLogN) Implemented this one
+//store in a hash map run time:O(N) space time: O(N)
+//Do 2 loops and check run time:O(N2) space time:O(1)
