@@ -1,0 +1,24 @@
+//Run time: O(N) Solution
+//Space: O(1)
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        
+        int maxProduct = nums[0];
+        int currProductMin = nums[0];
+        int currProductMax = nums[0];
+        
+        for(int i = 1; i < nums.size(); i++){
+            if(nums[i] < 0){
+                swap(currProductMin,currProductMax );
+            }
+            currProductMin = min(nums[i], currProductMin * nums[i]);
+            currProductMax = max(nums[i], currProductMax * nums[i]);
+            maxProduct = max(maxProduct, currProductMax);
+        }
+        return maxProduct;
+    }
+};
+
+
+
