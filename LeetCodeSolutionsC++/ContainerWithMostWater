@@ -1,0 +1,36 @@
+//runtime: O(N)
+//space O(1)
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int shorterHeight;
+        int maxArea = INT_MIN;
+        int left = 0;
+        int right = height.size() - 1;
+        
+        while(left < right){
+            //shorterHeight= min(height[left], height[right]);
+            if(height[left] < height[right]){
+                maxArea = max(maxArea, (right - left) * height[left]);
+                left++;
+            }
+            else{
+                maxArea = max(maxArea, (right - left) * height[right]);
+                right--;
+            }
+        }
+        return maxArea;
+    }
+};
+
+/* 
+pseudocode
+area = shorter line * width
+
+so left = 0;
+   right = nums.size() -1;
+   
+   try to find the bigger line so if compare left and right and whichever is shorter move that one
+   till left < right
+
+*/

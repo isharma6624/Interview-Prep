@@ -1,0 +1,80 @@
+//run time: Better soln easier to implement no need to check for dups but also O(N2)
+//space is same: O(N)
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end()); //sort the array to use 2 pointers that move inwards
+        vector<vector<int>> ans; //result
+        set<vector<int>> sumTriplet; //using set then dont have to check for dup
+        
+        if(nums.empty() || nums.size() < 3) //if less than 3 there wont exist 3sum
+            return ans;
+
+        for(int i = 0; i < nums.size(); i++){ //for each element we do the 2 ptr moving inwards 
+            int left = i+1;
+            int right = nums.size() - 1;
+            int sum = 0 - nums[i];
+            while(left < right){
+                if(nums[left] + nums[right] == sum){
+                    sumTriplet.insert({-sum,nums[left],nums[right]});
+                    left++;
+                    right--;
+                }
+                else if(nums[left] + nums[right] < sum)
+                    left++;
+                else
+                    right--;
+            }
+           
+        }
+        
+        for(auto i : sumTriplet){ //push from set to vector as needed format
+            ans.push_back(i);
+        }
+        return ans;
+
+        }
+    
+};
+
+//run time: O(N2)
+//space: extra space used O(N) if we exclude ans array
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end()); //sort the array to use 2 pointers that move inwards
+        vector<vector<int>> ans; //result 
+        
+        if(nums.empty() || nums.size() < 3) //if less than 3 there wont exist 3sum
+            return ans;
+
+        for(int i = 0; i < nums.size() - 2; i++){ //for each element we do the 2 ptr moving inwards 
+            
+            if( i == 0 || (i > 0 && nums[i] != nums[i-1])){ //need to start from 0 or make sure skip dup
+                int low = i+1;
+                int high = nums.size()-1;
+                int sum = 0 - nums[i];
+                
+                while(low < high){ //2 ptr moving inwards
+                    if(nums[low] + nums[high] == sum){ //sum found
+                        vector<int> sumTriplet; //create []
+                        sumTriplet.push_back(nums[i]);  
+                        sumTriplet.push_back(nums[low]);
+                        sumTriplet.push_back(nums[high]);
+                        ans.push_back(sumTriplet); //push into ans
+                        while(low < high && nums[low] == nums[low+1]) //skip low or high dup 
+                            low++;
+                        while(low < high && nums[high] == nums[high-1]) 
+                            high--;
+                        low++;
+                        high--;
+                    }
+                    else if(nums[low] + nums[high] < sum) low++;
+                    else high--;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
