@@ -1,0 +1,41 @@
+//Solution 1: Easy sorting function C++ stl use
+//run time: O(N.log(N))
+//space: O(1)
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end()); //sorting time complexity is O(N.log(N))
+        sort(t.begin(), t.end());
+        
+        if(s == t)
+            return true;
+        else
+            return false;
+    }
+};
+
+
+//Solution 2: using a counter array. 
+//run time: O(N)
+//space: O(1)
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        
+        if(s.length() != t.length())
+            return false;
+        
+        int count[26] = {0}; //dont forget to initalize all elemnts to 0. Otherwise it might be null
+        
+        for(int i = 0; i < s.length() ; i++){
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
+        }
+        
+        for(auto c : count){
+            if(c != 0)
+                return false;
+        }
+        return true;
+    }
+};
